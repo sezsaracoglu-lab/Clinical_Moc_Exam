@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clinical Psychology — Practice Question Bank (3 Sets × 105)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f3ec; --card:#fffdf8; --ink:#2c2722; --soft:#6f675c;
+    --line:#e6ddcd; --gold:#c9a96e; --gold-deep:#a8854a;
+    --sage:#7c8a6f; --blue:#6b7f93;
+    --green:#5d8a5a; --green-bg:#eaf3e8; --red:#bf5b4b; --red-bg:#f8eae7;
+    --shadow:0 6px 26px rgba(60,48,30,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'DM Sans',system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:#fff}
+  .wrap{max-width:840px;margin:0 auto;padding:28px 20px 90px}
+
+  /* ===== START ===== */
+  #start{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .crest{width:62px;height:62px;margin-bottom:14px}
+  #start h1{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:700;line-height:1.05}
+  #start .sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:var(--gold-deep);margin-bottom:8px}
+  #start .lead{max-width:560px;font-size:15px;color:var(--soft);margin:6px 0 26px}
+  .setgrid{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+  .setcard{width:230px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 22px;box-shadow:var(--shadow);cursor:pointer;transition:.18s;text-align:left}
+  .setcard:hover{transform:translateY(-3px);border-color:var(--gold);box-shadow:0 12px 34px rgba(60,48,30,.16)}
+  .setcard .badge{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-deep);font-weight:700}
+  .setcard h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:700;margin:4px 0 10px}
+  .setcard p{font-size:13.5px;color:var(--soft)}
+  .setcard .go{margin-top:16px;display:inline-block;font-weight:600;color:var(--gold-deep);font-size:14px}
+
+  /* ===== QUIZ ===== */
+  .progbar{height:5px;background:var(--line)}
+  .progfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-deep));width:0;transition:width .3s}
+  #quiz{display:none}
+  .qbar{position:sticky;top:0;z-index:20;background:rgba(247,243,236,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin:0 -20px 0;padding:0}
+  .qbar .row{max-width:840px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .backbtn{font-weight:600;font-size:14px;color:var(--gold-deep);background:none;border:none;cursor:pointer;padding:4px 0}
+  .backbtn:hover{text-decoration:underline}
+  .setlabel{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:18px}
+  .spacer{flex:1}
+  .scorepill{font-weight:600;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;max-width:840px;margin:14px auto 0;padding:0 0}
+  .chip{font-size:12.5px;font-weight:600;border:1.5px solid var(--line);background:#fff;color:var(--soft);border-radius:999px;padding:7px 13px;cursor:pointer;transition:.14s;white-space:nowrap}
+  .chip:hover{border-color:var(--gold)}
+  .chip.active{background:var(--gold);border-color:var(--gold);color:#fff}
+
+  .qtop{display:flex;align-items:center;justify-content:space-between;margin:24px 0 6px;gap:10px;flex-wrap:wrap}
+  .qcount{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-deep);font-weight:600}
+  .themetag{font-size:12px;font-weight:600;color:var(--soft);background:#f1ead7;border-radius:999px;padding:5px 12px}
+  .qcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 30px 26px;box-shadow:var(--shadow)}
+  .qtext{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.3;margin-bottom:22px}
+  .opt{display:flex;align-items:flex-start;gap:14px;border:1.5px solid var(--line);border-radius:13px;padding:15px 17px;margin-bottom:12px;cursor:pointer;transition:.14s;background:#fff}
+  .opt:hover{border-color:var(--gold);background:#fffdf6}
+  .opt .lt{flex:none;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--soft);transition:.14s}
+  .opt .tx{font-size:16px;padding-top:2px}
+  .opt.correct{border-color:var(--green);background:var(--green-bg)}
+  .opt.correct .lt{background:var(--green);border-color:var(--green);color:#fff}
+  .opt.wrong{border-color:var(--red);background:var(--red-bg)}
+  .opt.wrong .lt{background:var(--red);border-color:var(--red);color:#fff}
+  .opt.locked{cursor:default}
+  .opt.locked:hover{background:#fff}
+  .opt.correct.locked:hover{background:var(--green-bg)}
+  .opt.wrong.locked:hover{background:var(--red-bg)}
+  .explain{display:none;margin-top:14px;border-left:3px solid var(--gold);background:#fbf6ec;border-radius:0 10px 10px 0;padding:13px 16px;font-size:14.5px;color:#5a5147}
+  .explain.show{display:block}
+  .explain .verdict{font-weight:700;margin-right:5px}
+  .explain .verdict.ok{color:var(--green)}
+  .explain .verdict.no{color:var(--red)}
+
+  .nav{display:flex;gap:12px;margin-top:22px;align-items:center}
+  .navbtn{font-weight:600;font-size:15px;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:11px 26px;cursor:pointer;transition:.15s}
+  .navbtn:hover:not(:disabled){border-color:var(--gold);color:var(--gold-deep)}
+  .navbtn:disabled{opacity:.4;cursor:default}
+  .navbtn.primary{background:var(--gold);color:#fff;border-color:var(--gold)}
+  .navbtn.primary:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff}
+
+  .navigator{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+  .navigator h4{font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:var(--soft);font-weight:600;margin-bottom:12px}
+  .ngrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:7px}
+  .ncell{aspect-ratio:1;border:1.5px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;cursor:pointer;background:#fff;color:var(--soft);transition:.12s}
+  .ncell:hover{border-color:var(--gold)}
+  .ncell.current{outline:2px solid var(--gold);outline-offset:1px}
+  .ncell.ok{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+  .ncell.no{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--soft)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .dot{width:12px;height:12px;border-radius:4px;border:1.5px solid var(--line);display:inline-block}
+  .dot.ok{background:var(--green-bg);border-color:var(--green)}
+  .dot.no{background:var(--red-bg);border-color:var(--red)}
+
+  @media(max-width:560px){
+    #start h1{font-size:36px}.qtext{font-size:22px}.qcard{padding:22px 18px}.setcard{width:100%}
+  }
+</style>
+</head>
+<body>
+<div class="progbar"><div class="progfill" id="progfill"></div></div>
+
+<div class="wrap">
+
+  <section id="start">
+    <svg class="crest" viewBox="0 0 64 64" fill="none">
+      <circle cx="32" cy="32" r="30" stroke="#c9a96e" stroke-width="2"/>
+      <path d="M32 14c-6 4-6 12 0 16 6-4 6-12 0-16z" fill="#c9a96e" opacity=".85"/>
+      <path d="M20 34c4 8 20 8 24 0" stroke="#a8854a" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="32" cy="44" r="2.4" fill="#a8854a"/>
+    </svg>
+    <h1>Clinical Psychology</h1>
+    <div class="sub">Practice Question Bank</div>
+    <p class="lead">Three full sets, each with 105 questions &mdash; 15 per theme across Themes 2&ndash;8. Three options per question; click an answer to lock it in and reveal the correct choice with an explanation. Filter by theme, track your score, and switch sets any time.</p>
+    <div class="setgrid" id="setgrid"></div>
+  </section>
+
+  <section id="quiz">
+    <div class="qbar">
+      <div class="row">
+        <button class="backbtn" onclick="backToSets()">&larr; All sets</button>
+        <span class="setlabel" id="setlabel">Set 1</span>
+        <span class="spacer"></span>
+        <span class="scorepill" id="scorepill">0 / 0 correct</span>
+      </div>
+      <div class="row" style="padding-top:0">
+        <div class="chips" id="chips"></div>
+      </div>
+    </div>
+
+    <div class="qtop">
+      <span class="qcount" id="qcount"></span>
+      <span class="themetag" id="themetag"></span>
+    </div>
+
+    <div class="qcard">
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+      <div class="explain" id="explain"></div>
+    </div>
+
+    <div class="nav">
+      <button class="navbtn" id="prevBtn" onclick="go(-1)">&larr; Previous</button>
+      <span class="spacer"></span>
+      <button class="navbtn primary" id="nextBtn" onclick="go(1)">Next &rarr;</button>
+    </div>
+
+    <div class="navigator">
+      <h4>Question navigator</h4>
+      <div class="ngrid" id="ngrid"></div>
+      <div class="legend">
+        <span><i class="dot"></i> Unanswered</span>
+        <span><i class="dot ok"></i> Correct</span>
+        <span><i class="dot no"></i> Incorrect</span>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+const THEMES = [
+  "Theme 2 · Autism Spectrum Disorder",
+  "Theme 3 · Mood Disorders",
+  "Theme 4 · ADHD",
+  "Theme 5 · Anxiety Disorders",
+  "Theme 6 · Eating Disorders",
+  "Theme 7 · Substance Use Disorders",
+  "Theme 8 · Diagnosis & the DSM-5"
+];
+const QBANK = {};
+QBANK["Theme 2 · Autism Spectrum Disorder"] = [
+  {q:"DSM-5 defines autism spectrum disorder by deficits in which two core domains?", opts:["Social communication/interaction AND restricted, repetitive behaviours","Attention AND hyperactivity","Mood AND sleep"], a:0, e:"ASD requires (1) persistent deficits in social communication and interaction <b>and</b> (2) restricted, repetitive patterns of behaviour, interests or activities."},
+  {q:"What happened to Asperger's disorder in DSM-5?", opts:["It was merged into the single autism spectrum disorder","It was renamed social anxiety disorder","It was removed with no replacement"], a:0, e:"DSM-5 collapsed autistic disorder, Asperger's and PDD-NOS into one dimensional <b>autism spectrum disorder</b>."},
+  {q:"DSM-5 rates ASD severity (Levels 1–3) according to:", opts:["The amount of support the person requires","IQ alone","Age of onset"], a:0, e:"Severity is graded by the <b>level of support</b> needed in each domain (Level 1 'requiring support' to Level 3 'requiring very substantial support')."},
+  {q:"For an ASD diagnosis, symptoms must be present:", opts:["In the early developmental period","Only after age 12","Only in adulthood"], a:0, e:"Onset is in <b>early development</b>, though deficits may only become fully apparent when social demands exceed the person's capacities."},
+  {q:"Which is NOT an example of a restricted/repetitive behaviour?", opts:["Auditory hallucinations","Insistence on sameness and routines","Stereotyped movements or echolalia"], a:0, e:"Hallucinations are a psychotic symptom. RRBs include stereotypies, insistence on sameness, fixated interests and sensory reactivity."},
+  {q:"Which sensory feature did DSM-5 add to the ASD criteria?", opts:["Hyper- or hypo-reactivity to sensory input","Mandatory blindness","Loss of smell"], a:0, e:"DSM-5 explicitly added <b>sensory hyper-/hypo-reactivity</b> (e.g. distress at sounds, indifference to pain) as a type of RRB."},
+  {q:"Roughly how common is ASD?", opts:["About 1 in 100 (around 1–2%)","About 1 in 10","About 1 in 10,000"], a:0, e:"Modern estimates are roughly <b>1–2%</b> of children — about 1 in 100, with higher figures in some recent surveys."},
+  {q:"What is the approximate sex ratio of ASD diagnoses?", opts:["About 3–4 boys to every girl","Equal between sexes","More common in girls"], a:0, e:"ASD is diagnosed about <b>3–4 times more often in boys</b>; girls may be under-diagnosed due to camouflaging."},
+  {q:"The strongest evidence for a biological basis of autism comes from:", opts:["High heritability in twin and family studies","Parenting-style surveys","Vaccination records"], a:0, e:"Twin and family studies show ASD is <b>highly heritable</b> — one of the most heritable psychiatric conditions."},
+  {q:"The 'refrigerator mother' theory of autism is best described as:", opts:["A discredited idea blaming cold, distant parenting","The current leading explanation","A specific genetic mutation"], a:0, e:"Bettelheim's <b>refrigerator-mother</b> theory blamed emotionally distant mothers and has been thoroughly discredited."},
+  {q:"What is the scientific status of the vaccine–autism claim?", opts:["Debunked — the original study was fraudulent and retracted","Confirmed by repeated replication","Still genuinely unknown"], a:0, e:"Wakefield's 1998 MMR paper was <b>retracted for fraud</b>; large studies find no link between vaccines and autism."},
+  {q:"The 'weak central coherence' theory proposes that autistic people:", opts:["Focus on local detail at the expense of the global whole","Cannot perceive any detail","Have no long-term memory"], a:0, e:"Weak central coherence describes a processing bias toward <b>detail over global/contextual meaning</b>."},
+  {q:"Executive-dysfunction accounts of autism emphasise difficulty with:", opts:["Planning, cognitive flexibility and inhibition","Hearing and vision","Gross motor walking"], a:0, e:"Executive-function problems (planning, flexibility, inhibition) help explain rigidity and insistence on sameness."},
+  {q:"The Sally-Anne (false-belief) task is designed to test:", opts:["Theory of mind","IQ","Hearing"], a:0, e:"The Sally-Anne task assesses <b>theory of mind</b> — grasping that another person can hold a false belief."},
+  {q:"Reduced joint attention in autism appears as:", opts:["Less pointing, showing and gaze-following","Only in adulthood","Never observable"], a:0, e:"Reduced <b>joint attention</b> (sharing focus via pointing, showing, following gaze) is an early red flag for ASD."},
+  {q:"Which set of conditions commonly co-occurs with ASD?", opts:["Intellectual disability, ADHD and anxiety","No other conditions ever","Only schizophrenia"], a:0, e:"Frequent comorbidities include intellectual disability, ADHD, anxiety, epilepsy and gastrointestinal problems."},
+  {q:"Regarding ASD and ADHD, DSM-5:", opts:["Allows them to be diagnosed together","Forbids co-diagnosis","Treats them as identical"], a:0, e:"DSM-5 permits a concurrent <b>ASD + ADHD</b> diagnosis, which DSM-IV had prohibited."},
+  {q:"The best-supported intervention for young children with ASD is:", opts:["Early intensive behavioural/developmental intervention (e.g. ABA-based)","No intervention","Brain surgery"], a:0, e:"<b>Early, intensive behavioural/developmental intervention</b> improves outcomes; ABA-based programmes have the strongest evidence."},
+  {q:"Pivotal Response Treatment (PRT) works by targeting:", opts:["Pivotal areas like motivation that influence many behaviours","Only handwriting","Diet"], a:0, e:"PRT is a naturalistic behavioural method focusing on <b>pivotal areas</b> (motivation, self-initiation) that yield broad gains."},
+  {q:"Medication in ASD is mainly used to:", opts:["Treat associated symptoms such as irritability/aggression, not core autism","Cure autism","Replace all therapy"], a:0, e:"No drug treats core ASD; risperidone and aripiprazole are approved for <b>irritability/aggression</b> associated with ASD."},
+  {q:"'Echolalia' refers to:", opts:["Repeating words or phrases that were heard","Avoiding eye contact","Lining up objects"], a:0, e:"<b>Echolalia</b> is the repetition of others' speech, immediate or delayed; it is common in autism."},
+  {q:"Savant (exceptional isolated) skills occur in:", opts:["A minority of autistic people","All autistic people","No autistic people"], a:0, e:"Striking isolated abilities (<b>savant skills</b>) occur in a minority, not the majority, of autistic individuals."},
+  {q:"Prognosis in ASD is generally better when:", opts:["Language and cognitive ability are higher and intervention is early","IQ is lower","No support is provided"], a:0, e:"Better outcomes are linked to higher IQ, functional language by around age 5, and <b>early intervention</b>."},
+  {q:"'Camouflaging' (masking) in autism means:", opts:["Hiding autistic traits to fit in — common in girls and women","A type of medication","A sensory aid"], a:0, e:"<b>Masking</b> (suppressing autistic behaviours) can delay diagnosis, especially in females, and is linked to exhaustion."},
+  {q:"The neurodiversity perspective argues that autism:", opts:["Is a natural variation to be supported, not only a deficit","Should be eliminated","Does not exist"], a:0, e:"The <b>neurodiversity</b> movement frames autism as a difference, emphasising acceptance and accommodation alongside support."},
+  {q:"Part of the rise in autism prevalence over time reflects:", opts:["Broadened criteria and improved awareness/detection","Vaccination programmes","Sugar in the diet"], a:0, e:"Wider diagnostic criteria, greater awareness and better detection explain much of the increase in diagnoses."},
+  {q:"A widely used early screening questionnaire for toddlers is the:", opts:["M-CHAT","MMPI","WAIS"], a:0, e:"The <b>Modified Checklist for Autism in Toddlers (M-CHAT)</b> is a common early screening tool."},
+  {q:"The gold-standard observational diagnostic instrument for autism is the:", opts:["ADOS","Rorschach","Beck Depression Inventory"], a:0, e:"The <b>Autism Diagnostic Observation Schedule (ADOS)</b>, often paired with the ADI-R interview, is the standard assessment."},
+  {q:"Restricted interests in autism are typically:", opts:["Unusually intense and narrowly focused","Completely absent","Always dangerous"], a:0, e:"<b>Circumscribed interests</b> are unusually intense, narrow and absorbing."},
+  {q:"Self-stimulatory behaviour ('stimming') most often serves to:", opts:["Self-regulate or soothe (e.g. hand-flapping, rocking)","Communicate in formal sign language","Imitate other children"], a:0, e:"<b>Stimming</b> helps regulate arousal/emotion; modern approaches often allow harmless stimming rather than suppressing it."},
+  {q:"Some autistic children show a pattern of developmental regression. When?", opts:["Loss of skills around 18–24 months","Sudden onset at age 30","Only after a physical injury"], a:0, e:"A subset show <b>regression</b> (loss of language/social skills) during the second year of life."},
+  {q:"The 'broader autism phenotype' refers to:", opts:["Subclinical autistic traits in relatives","A cure for autism","A class of medication"], a:0, e:"First-degree relatives often show milder, subclinical autistic-like traits — evidence of genetic liability."},
+  {q:"Hallmark social-communication features of autism include atypical:", opts:["Eye contact and nonverbal communication","Height and weight","Hair and eye colour"], a:0, e:"Reduced or atypical <b>eye contact, gestures and facial expression</b> are central social-communication features."},
+  {q:"Which is NOT a core DSM-5 criterion for ASD?", opts:["Recurrent panic attacks","Deficits in social-emotional reciprocity","Restricted, repetitive behaviour"], a:0, e:"Panic attacks belong to anxiety disorders; ASD's core criteria are social-communication deficits plus RRBs."},
+  {q:"Intellectual ability across the autism spectrum:", opts:["Ranges from intellectual disability to above average","Is always low","Is always high"], a:0, e:"ASD spans the <b>full IQ range</b>; the spectrum includes people with and without intellectual disability."},
+  {q:"Speech and language in autism are best described as:", opts:["Highly variable, from nonverbal to fluent with pragmatic difficulties","Always completely absent","Always perfectly typical"], a:0, e:"Some autistic people are minimally verbal; others speak fluently but struggle with <b>pragmatic (social) language</b>."},
+  {q:"A key principle of behavioural skill-teaching in autism is:", opts:["Breaking skills into small steps with reinforcement","Using punishment only","Ignoring the child entirely"], a:0, e:"Behavioural teaching uses <b>task analysis</b> (small steps), prompting and positive reinforcement to build skills."},
+  {q:"'Social Stories' are used to:", opts:["Teach social situations and expectations","Diagnose autism","Measure IQ"], a:0, e:"<b>Social Stories</b> describe social situations and appropriate responses to help autistic individuals navigate them."},
+  {q:"A practical implication of the double-empathy problem is that interventions should:", opts:["Adapt both sides, not only 'fix' the autistic person","Train only the autistic person","Do nothing at all"], a:0, e:"If miscommunication is mutual, non-autistic people and environments should <b>also adapt</b> — not just the autistic individual."},
+  {q:"Anxiety in autistic people is:", opts:["Very common and often under-recognised","Extremely rare","Impossible"], a:0, e:"Anxiety disorders are <b>highly comorbid</b> with autism and are easily missed because the presentation can differ."},
+  {q:"Which is an established biological risk factor associated with ASD?", opts:["Advanced parental age","Watching television","Eating sugar"], a:0, e:"<b>Advanced parental age</b>, prematurity and some prenatal factors are associated risks — none acts as a single 'cause'."},
+  {q:"Many autistic self-advocates prefer which kind of language?", opts:["Identity-first ('autistic person'), though preferences vary","'Person with a disease' in all cases","No labels of any kind"], a:0, e:"Many prefer <b>identity-first</b> language ('autistic person'); since preferences vary, it is best to ask the individual."},
+  {q:"Sensory-friendly environments help autistic people by:", opts:["Reducing overwhelming stimuli such as bright light and noise","Increasing background noise","Removing all structure"], a:0, e:"Adjusting <b>sensory load</b> (dimmer lights, quieter spaces) reduces distress given sensory hyper-reactivity."},
+  {q:"Theory-of-mind difficulties can make it hard to:", opts:["Infer others' intentions, sarcasm and deception","Walk or balance","Perceive colour"], a:0, e:"Understanding others' mental states underlies reading <b>intentions, sarcasm, irony and deception</b>."},
+  {q:"Adult outcomes for autistic people are best described as:", opts:["Highly variable — some need ongoing support, others live independently","Always institutional","Always fully independent"], a:0, e:"Adult outcomes are <b>heterogeneous</b>, shaped by language, IQ, co-occurring conditions and available support."}
+];
+QBANK["Theme 3 · Mood Disorders"] = [
+  {q:"A major depressive episode requires how many symptoms over what minimum period?", opts:["At least 5 symptoms for at least 2 weeks","At least 2 symptoms for 1 day","At least 8 symptoms for 6 months"], a:0, e:"MDD requires <b>≥5 symptoms for ≥2 weeks</b>, including either depressed mood or loss of interest/pleasure."},
+  {q:"'Anhedonia' refers to:", opts:["Loss of interest or pleasure in activities","Excessive energy","Fear of open spaces"], a:0, e:"<b>Anhedonia</b> — markedly reduced interest or pleasure — is one of the two cardinal symptoms of depression."},
+  {q:"Which two symptoms are the cardinal (core) features of major depression?", opts:["Depressed mood OR loss of interest/pleasure","Mania OR psychosis","Insomnia OR overeating"], a:0, e:"At least one of <b>depressed mood</b> or <b>anhedonia</b> must be present for a major depressive episode."},
+  {q:"Persistent depressive disorder (dysthymia) involves depressed mood most days for at least:", opts:["2 years","2 weeks","6 months"], a:0, e:"<b>Persistent depressive disorder</b> is chronic low mood for ≥2 years (1 year in children/adolescents)."},
+  {q:"Bipolar I disorder is defined by the presence of:", opts:["At least one manic episode","Only depressive episodes","Only hypomania"], a:0, e:"<b>Bipolar I</b> requires at least one full <b>manic</b> episode; depressive episodes usually occur but are not required."},
+  {q:"A manic episode must last at least:", opts:["1 week (or any duration if hospitalisation is needed)","1 day","1 month"], a:0, e:"Mania lasts <b>≥1 week</b> (or less if severe enough to require hospitalisation)."},
+  {q:"How does hypomania differ from mania?", opts:["Shorter (≥4 days), less severe, no marked impairment or psychosis","It lasts longer","It always includes hallucinations"], a:0, e:"<b>Hypomania</b> is ≥4 days, milder, without marked impairment, psychosis, or hospitalisation."},
+  {q:"Bipolar II disorder is characterised by:", opts:["Hypomanic and major depressive episodes, but no full mania","Full manic episodes only","No mood episodes"], a:0, e:"<b>Bipolar II</b> = at least one hypomanic episode plus at least one major depressive episode, never a full manic episode."},
+  {q:"Cyclothymic disorder involves:", opts:["≥2 years of hypomanic and depressive symptoms not meeting full criteria","One severe manic episode","A single depressive episode"], a:0, e:"<b>Cyclothymia</b> is chronic (≥2 years) fluctuating sub-threshold hypomanic and depressive symptoms."},
+  {q:"Approximately what is the lifetime prevalence of major depression?", opts:["Around 16–20%","Around 1%","Around 50%"], a:0, e:"MDD is common, with lifetime prevalence around <b>16–20%</b> — a leading cause of disability worldwide."},
+  {q:"Depression is roughly how much more common in women than men?", opts:["About twice as common","Half as common","Equally common"], a:0, e:"Major depression is about <b>2× more common in women</b> than men."},
+  {q:"The sex ratio of bipolar disorder is:", opts:["Roughly equal in men and women","Far higher in women","Far higher in men"], a:0, e:"Unlike depression, <b>bipolar disorder</b> occurs at roughly equal rates in men and women."},
+  {q:"The monoamine hypothesis links depression to:", opts:["Low activity of serotonin and norepinephrine","Excess dopamine","Low blood sugar"], a:0, e:"The <b>monoamine hypothesis</b> proposes reduced serotonin/norepinephrine activity underlies depression (though it is an oversimplification)."},
+  {q:"SSRIs treat depression mainly by:", opts:["Blocking the reuptake of serotonin","Blocking dopamine receptors","Increasing GABA"], a:0, e:"<b>SSRIs</b> (selective serotonin reuptake inhibitors) block serotonin reuptake, raising synaptic serotonin."},
+  {q:"Which is an example of an SSRI?", opts:["Fluoxetine (Prozac)","Diazepam","Risperidone"], a:0, e:"<b>Fluoxetine</b> is a classic SSRI; diazepam is a benzodiazepine and risperidone an antipsychotic."},
+  {q:"Antidepressants typically take how long to show full benefit?", opts:["About 2–4 weeks","Within minutes","About a year"], a:0, e:"Therapeutic effects usually emerge over <b>2–4 weeks</b>, a key point for adherence and suicide-risk monitoring."},
+  {q:"Seligman's learned-helplessness model says depression can follow:", opts:["Exposure to uncontrollable aversive events","Too much success","A high-sugar diet"], a:0, e:"<b>Learned helplessness</b> — passivity after uncontrollable aversive events — was an influential model of depression."},
+  {q:"A depressive (pessimistic) attributional style explains bad events as:", opts:["Internal, stable and global","External, unstable and specific","Random and meaningless"], a:0, e:"The reformulated helplessness theory links depression to <b>internal, stable, global</b> attributions for negative events."},
+  {q:"Nolen-Hoeksema's research highlights which cognitive process in depression?", opts:["Rumination — repetitively dwelling on distress","Total memory loss","Hyperactivity"], a:0, e:"<b>Rumination</b> predicts depression onset/duration and is reported more by women, helping explain the sex difference."},
+  {q:"Electroconvulsive therapy (ECT) is mainly reserved for:", opts:["Severe or treatment-resistant depression","Mild stress","Phobias"], a:0, e:"<b>ECT</b> is effective for severe, psychotic, or treatment-resistant depression, often when rapid response is needed."},
+  {q:"Lithium is best classified as a:", opts:["Mood stabiliser used in bipolar disorder","Stimulant","Antipsychotic only"], a:0, e:"<b>Lithium</b> is a first-line <b>mood stabiliser</b> for bipolar disorder and reduces suicide risk."},
+  {q:"Behavioural activation treats depression by:", opts:["Increasing engagement in rewarding activities","Removing all activity","Prescribing stimulants"], a:0, e:"<b>Behavioural activation</b> counters withdrawal by scheduling pleasant, valued and mastery activities."},
+  {q:"Interpersonal therapy (IPT) for depression focuses on:", opts:["Relationships, roles and interpersonal problems","Childhood dreams only","Brain scans"], a:0, e:"<b>IPT</b> targets grief, role transitions, role disputes and interpersonal deficits."},
+  {q:"Seasonal-pattern depression (often winter) is commonly treated with:", opts:["Bright light therapy","Total darkness","A high-fat diet"], a:0, e:"Depression with a <b>seasonal pattern</b> responds to <b>light therapy</b>, alongside standard treatments."},
+  {q:"The 'peripartum onset' specifier refers to depression that begins:", opts:["During pregnancy or shortly after childbirth","Only in old age","Only in adolescence"], a:0, e:"The <b>peripartum</b> specifier covers onset during pregnancy or in the weeks after delivery (postpartum depression)."},
+  {q:"Premenstrual dysphoric disorder (PMDD) symptoms occur:", opts:["In the week(s) before menses, easing after onset","Randomly all month","Only after menopause"], a:0, e:"<b>PMDD</b> features marked mood symptoms in the late luteal phase that remit after menstruation begins."},
+  {q:"Which pattern of suicide is generally observed?", opts:["Women attempt more often; men die by suicide more often","Men attempt more; women die more","No sex differences exist"], a:0, e:"<b>Women attempt</b> more frequently, but <b>men die</b> by suicide more often (often using more lethal means)."},
+  {q:"Which antidepressant class is most dangerous in overdose?", opts:["Tricyclic antidepressants (TCAs)","SSRIs","Light therapy"], a:0, e:"<b>TCAs</b> carry a high overdose risk (cardiotoxicity), a reason SSRIs are usually preferred first-line."},
+  {q:"Patients taking MAOIs must avoid:", opts:["Tyramine-rich foods such as aged cheese","All vegetables","Drinking water"], a:0, e:"<b>MAOIs</b> can cause a hypertensive crisis with <b>tyramine</b>-rich foods (aged cheese, cured meats)."},
+  {q:"Compared with major depression, the heritability of bipolar disorder is:", opts:["Higher — bipolar is more strongly genetic","Lower","Zero"], a:0, e:"<b>Bipolar disorder</b> is among the most heritable psychiatric conditions, more so than unipolar depression."},
+  {q:"Twin studies show concordance for mood disorders is highest in:", opts:["Identical (monozygotic) twins","Fraternal twins","Unrelated people"], a:0, e:"Higher concordance in <b>monozygotic</b> than dizygotic twins indicates a substantial genetic contribution."},
+  {q:"The diathesis-stress model of depression proposes:", opts:["A vulnerability that is triggered by stress","Stress alone with no predisposition","Genes alone with no environment"], a:0, e:"<b>Diathesis-stress</b>: an underlying vulnerability (genetic/cognitive) interacts with life stress to produce disorder."},
+  {q:"HPA-axis findings in depression typically show:", opts:["Elevated cortisol / overactive stress system","No hormonal changes","Very low cortisol always"], a:0, e:"Many depressed patients show <b>HPA-axis overactivity</b> and elevated cortisol."},
+  {q:"'Neurovegetative' symptoms of depression include changes in:", opts:["Sleep, appetite and energy","Eye colour","Height"], a:0, e:"Depression alters <b>sleep, appetite, energy and psychomotor activity</b> — the neurovegetative symptoms."},
+  {q:"Psychomotor changes in depression can include:", opts:["Retardation (slowing) or agitation","Only super-fast speech","No motor change ever"], a:0, e:"Depression can produce <b>psychomotor retardation</b> (slowing) or, less often, agitation."},
+  {q:"In severe mood episodes, psychotic features are usually:", opts:["Mood-congruent (themes match the mood)","Always mood-incongruent","Never possible"], a:0, e:"Severe depression or mania can include <b>mood-congruent</b> delusions/hallucinations (e.g. guilt in depression, grandiosity in mania)."},
+  {q:"Which is a classic symptom of a manic episode?", opts:["Decreased need for sleep with high energy","Excessive sleeping with low energy","Loss of appetite only"], a:0, e:"Mania features <b>reduced need for sleep</b>, grandiosity, racing thoughts, and risky goal-directed behaviour."},
+  {q:"A risk of giving antidepressants to a person with bipolar disorder is:", opts:["Triggering a switch into mania","Curing it instantly","Causing deafness"], a:0, e:"Antidepressants can precipitate a <b>manic switch</b>; mood stabilisers are the foundation of bipolar treatment."},
+  {q:"Beck's cognitive model emphasises which mechanism in depression?", opts:["Negative schemas and automatic negative thoughts","Excess dopamine","Vitamin deficiency"], a:0, e:"Beck proposed depression is maintained by <b>negative schemas</b> and biased, automatic negative thoughts."},
+  {q:"Continuing treatment after symptoms remit is important because it:", opts:["Reduces the risk of relapse","Guarantees a cure forever","Has no effect"], a:0, e:"<b>Continuation/maintenance</b> treatment lowers relapse risk, since mood disorders are often recurrent."},
+  {q:"'Double depression' describes:", opts:["A major depressive episode on top of persistent depressive disorder","Two manic episodes","Depression plus mania at once"], a:0, e:"<b>Double depression</b> = a major depressive episode superimposed on chronic dysthymia."},
+  {q:"In global health terms, depression is:", opts:["A leading cause of disability worldwide","A rare condition","Only seen in wealthy countries"], a:0, e:"Major depression is one of the <b>leading causes of disability</b> globally."},
+  {q:"Ketamine/esketamine is notable for:", opts:["Rapid-acting effects in treatment-resistant depression","Being a placebo","Curing bipolar mania"], a:0, e:"<b>Esketamine</b> can produce rapid antidepressant effects in treatment-resistant cases, acting on glutamate."},
+  {q:"A strongly evidence-based psychotherapy for depression is:", opts:["Cognitive behavioural therapy (CBT)","Dream analysis alone","Bloodletting"], a:0, e:"<b>CBT</b> has robust evidence for treating depression and preventing relapse."},
+  {q:"A 'mixed features' specifier means a person shows:", opts:["Depressive and manic/hypomanic symptoms together","Only anxiety","Only insomnia"], a:0, e:"<b>Mixed features</b> indicate overlapping opposite-pole symptoms (e.g. depression with some manic features), raising risk."}
+];
+QBANK["Theme 4 · ADHD"] = [
+  {q:"ADHD is defined by symptoms in which two domains?", opts:["Inattention AND hyperactivity-impulsivity","Mood AND psychosis","Sleep AND appetite"], a:0, e:"ADHD involves <b>inattention</b> and/or <b>hyperactivity-impulsivity</b>."},
+  {q:"DSM-5 recognises how many presentations of ADHD?", opts:["Three: inattentive, hyperactive-impulsive, and combined","One only","Six"], a:0, e:"The three presentations are <b>predominantly inattentive, predominantly hyperactive-impulsive, and combined</b>."},
+  {q:"For an ADHD diagnosis, several symptoms must be present before what age?", opts:["Age 12","Age 3","Age 18"], a:0, e:"DSM-5 requires several symptoms before <b>age 12</b> (raised from age 7 in DSM-IV)."},
+  {q:"How many symptoms in a domain are needed for children (under 17)?", opts:["At least 6","At least 2","At least 10"], a:0, e:"Children need <b>≥6</b> symptoms in a domain; for those 17+, <b>≥5</b> suffice."},
+  {q:"ADHD symptoms must cause impairment in:", opts:["At least two settings (e.g. home and school)","Only one setting","Only during sleep"], a:0, e:"Symptoms must be present and impairing in <b>≥2 settings</b> to rule out situation-specific behaviour."},
+  {q:"Approximately what percentage of children have ADHD?", opts:["About 5%","About 0.1%","About 30%"], a:0, e:"Worldwide prevalence is around <b>5%</b> of children (estimates vary by criteria and source)."},
+  {q:"What happens to ADHD symptoms across development?", opts:["Hyperactivity often declines while inattention persists","All symptoms vanish by adolescence","Symptoms always worsen"], a:0, e:"Overt <b>hyperactivity</b> tends to lessen with age, but <b>inattention</b> and impairment frequently persist into adulthood."},
+  {q:"The heritability of ADHD is best described as:", opts:["High (around 70–80%)","Negligible","About 10%"], a:0, e:"Twin studies indicate ADHD is <b>highly heritable</b> (~70–80%)."},
+  {q:"Which neurotransmitter systems are most implicated in ADHD?", opts:["Dopamine and norepinephrine","GABA only","Histamine"], a:0, e:"ADHD is linked to <b>dopamine and norepinephrine</b> dysregulation, the targets of stimulant medication."},
+  {q:"Which brain region is most associated with ADHD?", opts:["The prefrontal cortex (executive control)","The occipital lobe","The cerebellum vermis only"], a:0, e:"The <b>prefrontal cortex</b> and its networks (executive function) show altered/delayed maturation in ADHD."},
+  {q:"Barkley's influential theory frames ADHD primarily as a deficit in:", opts:["Behavioural inhibition / self-regulation","Vision","Long-term memory storage"], a:0, e:"Barkley's model centres on impaired <b>behavioural inhibition</b>, which undermines self-regulation and executive function."},
+  {q:"Executive-function difficulties in ADHD commonly include problems with:", opts:["Working memory and inhibition","Colour perception","Hearing"], a:0, e:"Core executive weaknesses include <b>working memory, inhibition</b>, planning and self-monitoring."},
+  {q:"Stimulant medications reduce ADHD symptoms by:", opts:["Increasing dopamine and norepinephrine availability","Blocking serotonin","Sedating the whole brain"], a:0, e:"Stimulants raise <b>dopamine/norepinephrine</b> signalling, paradoxically improving focus and reducing hyperactivity."},
+  {q:"Which is a common stimulant used for ADHD?", opts:["Methylphenidate (Ritalin)","Fluoxetine","Lithium"], a:0, e:"<b>Methylphenidate</b> and amphetamine salts are the main stimulant treatments."},
+  {q:"Common side effects of stimulant medication include:", opts:["Reduced appetite and insomnia","Weight gain and sleepiness","Improved appetite"], a:0, e:"Typical side effects are <b>appetite suppression, insomnia</b>, headache and increased heart rate."},
+  {q:"A frequently used non-stimulant medication for ADHD is:", opts:["Atomoxetine","Diazepam","Risperidone"], a:0, e:"<b>Atomoxetine</b> (a norepinephrine reuptake inhibitor) is a non-stimulant option, useful when stimulants are unsuitable."},
+  {q:"Which psychosocial treatment has strong support for childhood ADHD?", opts:["Behavioural parent training","Dream interpretation","Bed rest"], a:0, e:"<b>Behavioural parent training</b> teaches consistent reinforcement and structure, with strong evidence."},
+  {q:"Which disorder very commonly co-occurs with childhood ADHD?", opts:["Oppositional defiant disorder / conduct disorder","Schizophrenia","Dementia"], a:0, e:"<b>ODD and conduct disorder</b> are among the most common comorbidities, alongside learning and anxiety disorders."},
+  {q:"The claim that sugar causes ADHD is:", opts:["A myth not supported by controlled studies","Strongly confirmed","Partly true for boys only"], a:0, e:"Controlled studies do <b>not</b> support sugar as a cause of ADHD."},
+  {q:"Children with ADHD often show 'delay aversion', meaning they:", opts:["Prefer a small immediate reward over a larger delayed one","Always wait patiently","Dislike all rewards"], a:0, e:"<b>Delay aversion</b> — preferring immediate over delayed rewards — reflects altered reward/motivational processing."},
+  {q:"A commonly used ADHD rating scale completed by parents/teachers is the:", opts:["Conners rating scale","Rorschach","WAIS"], a:0, e:"<b>Conners</b> scales (and others) gather standardised observations across settings to aid diagnosis."},
+  {q:"How does ADHD often present differently in girls?", opts:["More inattentive, less disruptive, and under-diagnosed","Always more hyperactive","It never occurs in girls"], a:0, e:"Girls more often show the <b>inattentive</b> presentation with fewer disruptive behaviours, so they are frequently under-diagnosed."},
+  {q:"Adult ADHD frequently presents as:", opts:["Disorganisation, restlessness and difficulty sustaining attention","Hallucinations","Loss of speech"], a:0, e:"Adults show <b>inner restlessness, disorganisation</b>, poor time management and inattention rather than overt hyperactivity."},
+  {q:"The large MTA study suggested the best outcomes for many children came from:", opts:["Combining medication with behavioural treatment","Behavioural treatment alone always","No treatment"], a:0, e:"The <b>MTA</b> study found carefully managed medication, often combined with behavioural treatment, was most effective for core symptoms."},
+  {q:"Effective classroom/home behavioural strategies for ADHD include:", opts:["Token economies and clear, consistent reward systems","Removing all rules","Long lectures only"], a:0, e:"<b>Token economies</b>, immediate reinforcement, and consistent structure help manage ADHD behaviour."},
+  {q:"Which is an inattention symptom of ADHD?", opts:["Frequently losing things and being easily distracted","Fidgeting constantly","Interrupting others"], a:0, e:"Inattention includes <b>careless errors, losing items, forgetfulness</b> and distractibility (fidgeting/interrupting are hyperactive-impulsive)."},
+  {q:"Which is a hyperactivity symptom?", opts:["Fidgeting and difficulty staying seated","Forgetting appointments","Daydreaming quietly"], a:0, e:"Hyperactivity includes <b>fidgeting, leaving one's seat, restlessness</b> and excessive talking."},
+  {q:"Which is an impulsivity symptom?", opts:["Blurting out answers and difficulty waiting one's turn","Reading slowly","Sleeping a lot"], a:0, e:"Impulsivity includes <b>blurting answers, interrupting, and trouble waiting</b>."},
+  {q:"Established prenatal/perinatal risk factors for ADHD include:", opts:["Maternal smoking or alcohol use and low birth weight","Listening to music","High family income"], a:0, e:"<b>Prenatal smoking/alcohol, prematurity, low birth weight</b> and lead exposure are associated risks."},
+  {q:"For an ADHD diagnosis, symptoms must:", opts:["Cause clinically significant impairment","Merely be present without impairment","Only appear during exams"], a:0, e:"Diagnosis requires <b>functional impairment</b>, not just the presence of symptoms."},
+  {q:"A 'rebound effect' with stimulants refers to:", opts:["Worsening symptoms/irritability as the dose wears off","Permanent cure","An allergic rash"], a:0, e:"As short-acting stimulants wear off, some children show a temporary <b>rebound</b> of symptoms or irritability."},
+  {q:"Stimulant medications are classified as controlled substances because they:", opts:["Have potential for misuse/abuse","Are dangerous to touch","Contain antibiotics"], a:0, e:"Stimulants have <b>abuse potential</b>, so prescribing and supply are regulated."},
+  {q:"One advantage of atomoxetine over stimulants is that it:", opts:["Is non-addictive and useful with comorbid anxiety or tics","Works in five minutes","Cures ADHD permanently"], a:0, e:"<b>Atomoxetine</b> lacks abuse potential and may suit patients with co-occurring anxiety or tic disorders."},
+  {q:"ADHD frequently co-occurs with which internalising problems?", opts:["Anxiety and depression","Mania only","No other problems"], a:0, e:"Beyond disruptive disorders, ADHD often co-occurs with <b>anxiety and depression</b>."},
+  {q:"A Continuous Performance Test (CPT) is used to assess:", opts:["Sustained attention and impulsivity","Reading comprehension","Personality"], a:0, e:"The <b>CPT</b> measures sustained attention and response inhibition, supplementing clinical assessment."},
+  {q:"The modern view of ADHD across the lifespan is that it:", opts:["Often persists into adulthood for many people","Always disappears by puberty","Only begins in adulthood"], a:0, e:"ADHD is now understood as frequently a <b>lifelong</b> condition, though presentation changes with age."},
+  {q:"Environmental supports that help people with ADHD include:", opts:["Routines, structure, lists and external reminders","Removing all schedules","Avoiding any planning tools"], a:0, e:"<b>Structure, routine, checklists and reminders</b> compensate for executive-function difficulties."},
+  {q:"ADHD is best understood as caused by:", opts:["Multiple interacting genetic and environmental factors","A single gene","Watching too much television alone"], a:0, e:"ADHD is <b>multifactorial</b> — many genes of small effect interacting with environmental risks."},
+  {q:"Compared with peers, children with ADHD have a higher risk of:", opts:["Accidental injuries","Being left-handed","Perfect attendance"], a:0, e:"Impulsivity/inattention raise the risk of <b>accidents and injuries</b>."},
+  {q:"In ADHD, the brain's reward and motivation processing tends to favour:", opts:["Immediate over delayed reinforcement","Only long-term goals","No reinforcement at all"], a:0, e:"Altered <b>reward processing</b> makes immediate reinforcement far more motivating than delayed outcomes."},
+  {q:"Which statement about diagnosing ADHD is correct?", opts:["It relies on a clinical history plus information from multiple informants","A single brain scan confirms it","A blood test confirms it"], a:0, e:"Diagnosis is <b>clinical</b>, integrating developmental history and reports from parents, teachers and the patient."},
+  {q:"Why might ADHD be over-diagnosed in some contexts?", opts:["Normal age-appropriate behaviour may be mislabelled, especially in the youngest in a class","Because it is impossible to diagnose","Because no criteria exist"], a:0, e:"Relatively younger children in a school year are more likely to be diagnosed, raising concerns about <b>over-diagnosis</b> of normal immaturity."},
+  {q:"A core goal of behavioural treatment in ADHD is to:", opts:["Provide immediate, consistent consequences for behaviour","Eliminate all rewards","Increase unpredictability"], a:0, e:"Because of delay aversion, ADHD treatment uses <b>immediate, consistent</b> reinforcement and consequences."},
+  {q:"Untreated ADHD is associated with poorer outcomes in:", opts:["Academic, occupational and relationship domains","Only athletic performance","Nothing measurable"], a:0, e:"ADHD predicts difficulties across <b>school, work and relationships</b>, underscoring the value of treatment."},
+  {q:"Which best captures the role of parenting in ADHD?", opts:["Parenting does not cause ADHD, but parenting strategies strongly affect outcomes","Bad parenting is the sole cause","Parenting is irrelevant"], a:0, e:"ADHD is not <b>caused</b> by parenting, yet effective behavioural parenting meaningfully improves functioning."}
+];
+QBANK["Theme 5 · Anxiety Disorders"] = [
+  {q:"What distinguishes 'fear' from 'anxiety'?", opts:["Fear responds to a present threat; anxiety anticipates a future one","They are identical","Anxiety is only physical, fear only mental"], a:0, e:"<b>Fear</b> is the alarm to an immediate threat; <b>anxiety</b> is apprehensive anticipation of future danger."},
+  {q:"A panic attack is best defined as:", opts:["An abrupt surge of intense fear peaking within minutes","A slow week-long sadness","A fear lasting only when asleep"], a:0, e:"A <b>panic attack</b> is a sudden surge of intense fear/discomfort that peaks within minutes, with somatic symptoms."},
+  {q:"Panic disorder requires:", opts:["Recurrent unexpected panic attacks plus worry about future attacks","A single attack","Only daytime worry"], a:0, e:"<b>Panic disorder</b> = recurrent unexpected attacks plus persistent concern or behaviour change about further attacks."},
+  {q:"Agoraphobia is the fear of:", opts:["Situations where escape may be hard or help unavailable","Spiders specifically","Social embarrassment only"], a:0, e:"<b>Agoraphobia</b> involves fear/avoidance of situations like crowds, transport, or open spaces where escape is difficult."},
+  {q:"A specific phobia must persist for at least:", opts:["6 months","2 weeks","1 day"], a:0, e:"DSM-5 requires the fear/avoidance to last <b>≥6 months</b> and be out of proportion to actual danger."},
+  {q:"Which is NOT one of the DSM-5 specific phobia types?", opts:["Social-evaluation type","Animal type","Blood-injection-injury type"], a:0, e:"Specific phobia subtypes are animal, natural environment, blood-injection-injury, situational, and other — social evaluation belongs to <b>social anxiety disorder</b>."},
+  {q:"Blood-injection-injury phobia is physiologically unusual because it can cause:", opts:["Fainting due to a drop in blood pressure/heart rate","A permanent racing heart","Total paralysis"], a:0, e:"Unlike other phobias, BII phobia can trigger a <b>vasovagal</b> response (BP/HR drop) and fainting."},
+  {q:"Applied tension treats blood-injection-injury phobia by:", opts:["Tensing muscles to raise blood pressure and prevent fainting","Relaxing completely","Avoiding all needles"], a:0, e:"<b>Applied tension</b> teaches patients to tense muscles, raising blood pressure to counter the fainting response."},
+  {q:"Social anxiety disorder centres on:", opts:["Fear of negative evaluation in social or performance situations","Fear of heights","Fear of germs"], a:0, e:"<b>Social anxiety disorder</b> is marked fear of scrutiny and negative evaluation by others."},
+  {q:"Generalised anxiety disorder (GAD) is characterised by:", opts:["Excessive, uncontrollable worry about many things for ≥6 months","Worry about one specific object","Brief panic only"], a:0, e:"<b>GAD</b> features pervasive, hard-to-control worry across domains lasting at least 6 months."},
+  {q:"Common physical symptoms of GAD include:", opts:["Restlessness, fatigue, muscle tension and sleep problems","Hallucinations","Loss of vision"], a:0, e:"GAD's physical features include <b>restlessness, fatigue, muscle tension, irritability</b> and disturbed sleep."},
+  {q:"Separation anxiety disorder involves:", opts:["Developmentally excessive fear of separation from attachment figures","Fear of strangers only in adults","Fear of crowds"], a:0, e:"<b>Separation anxiety</b> is disproportionate fear about being apart from those one is attached to; it can occur in adults too."},
+  {q:"Selective mutism is defined by:", opts:["Consistent failure to speak in specific situations despite speaking in others","Total inability to speak ever","Speaking only to strangers"], a:0, e:"<b>Selective mutism</b> is failure to speak in certain settings (e.g. school) while speaking normally elsewhere."},
+  {q:"In DSM-5, OCD and PTSD are:", opts:["Placed in their own chapters, no longer 'anxiety disorders'","Still anxiety disorders","Merged into one disorder"], a:0, e:"DSM-5 moved <b>OCD</b> and <b>PTSD</b> into separate chapters (obsessive-compulsive and trauma-related)."},
+  {q:"As a class, anxiety disorders are:", opts:["The most prevalent category of mental disorders","Extremely rare","Only diagnosed in children"], a:0, e:"<b>Anxiety disorders</b> are collectively the most common class of mental disorders."},
+  {q:"Anxiety disorders are generally:", opts:["More common in women than men","More common in men","Equally common"], a:0, e:"Most anxiety disorders are roughly <b>twice as common in women</b>."},
+  {q:"The 'Little Albert' study demonstrated that fear can be:", opts:["Acquired through classical conditioning","Inherited only","Cured by sugar"], a:0, e:"Watson & Rayner conditioned fear in <b>Little Albert</b>, showing phobias can be classically conditioned."},
+  {q:"Mowrer's two-factor theory says phobias are:", opts:["Acquired by classical conditioning and maintained by operant avoidance","Purely genetic","Caused by diet"], a:0, e:"<b>Two-factor theory</b>: fear is learned (classical) then maintained because <b>avoidance</b> is negatively reinforced."},
+  {q:"Why does avoidance maintain anxiety over time?", opts:["It prevents the fear from extinguishing through new learning","It cures the fear","It has no effect"], a:0, e:"Avoidance brings short-term relief but blocks <b>extinction</b>, so the fear is never disconfirmed."},
+  {q:"Seligman's 'preparedness' theory explains why people most easily develop fears of:", opts:["Evolutionarily threatening stimuli like snakes and spiders","Electrical outlets and cars","Books"], a:0, e:"<b>Preparedness</b>: we are biologically primed to learn fears of ancestrally dangerous stimuli."},
+  {q:"Clark's cognitive model of panic emphasises:", opts:["Catastrophic misinterpretation of bodily sensations","A brain tumour","Low intelligence"], a:0, e:"Panic is maintained by <b>catastrophically misinterpreting</b> normal sensations (e.g. a racing heart = 'heart attack')."},
+  {q:"'Anxiety sensitivity' refers to:", opts:["Fear of anxiety-related bodily sensations","Sensitivity to bright light","A skin condition"], a:0, e:"<b>Anxiety sensitivity</b> — fearing the sensations of anxiety themselves — predicts panic disorder."},
+  {q:"'Safety behaviours' are problematic because they:", opts:["Maintain anxiety by preventing disconfirmation of feared outcomes","Cure anxiety quickly","Are physically dangerous"], a:0, e:"<b>Safety behaviours</b> prevent the person from learning the feared catastrophe would not occur, maintaining anxiety."},
+  {q:"The core mechanism of exposure therapy is:", opts:["Confronting the feared stimulus so fear extinguishes","Avoiding the stimulus","Distraction only"], a:0, e:"<b>Exposure</b> works through extinction/inhibitory learning by facing the feared situation without escape."},
+  {q:"Systematic desensitisation combines:", opts:["Graded exposure with relaxation","Flooding with punishment","Medication with hypnosis"], a:0, e:"Wolpe's <b>systematic desensitisation</b> pairs a fear hierarchy with relaxation (counter-conditioning)."},
+  {q:"'Flooding' refers to:", opts:["Intense, prolonged exposure to the feared stimulus at full intensity","Very gradual exposure","Avoidance training"], a:0, e:"<b>Flooding</b> exposes the person to the most feared stimulus immediately and intensely."},
+  {q:"Interoceptive exposure (used in panic disorder) involves:", opts:["Deliberately inducing feared bodily sensations","Exposure to spiders","Talking about childhood"], a:0, e:"<b>Interoceptive exposure</b> provokes sensations like dizziness or rapid heartbeat to reduce their feared meaning."},
+  {q:"The first-line medication class for most anxiety disorders is:", opts:["SSRIs","Stimulants","Antipsychotics"], a:0, e:"<b>SSRIs</b> are first-line pharmacotherapy for anxiety disorders."},
+  {q:"A drawback of benzodiazepines for anxiety is:", opts:["Risk of tolerance and dependence","They take weeks to work","They cannot reduce anxiety"], a:0, e:"<b>Benzodiazepines</b> give fast relief but carry <b>dependence/tolerance</b> risk, so they are usually short-term."},
+  {q:"Benzodiazepines reduce anxiety by enhancing the action of:", opts:["GABA (the main inhibitory neurotransmitter)","Dopamine","Glutamate"], a:0, e:"Benzodiazepines potentiate <b>GABA</b>, increasing inhibition and producing calming effects."},
+  {q:"Kagan's 'behavioural inhibition' is a temperament that:", opts:["Predisposes children to later anxiety disorders","Protects against anxiety","Causes hyperactivity"], a:0, e:"<b>Behavioural inhibition</b> (shy, cautious responses to novelty) is a risk factor for later anxiety disorders."},
+  {q:"In anxiety disorders, the amygdala tends to be:", opts:["Overactive in response to threat","Completely inactive","Absent"], a:0, e:"The <b>amygdala</b> is hyper-responsive to threat cues, central to the fear circuit in anxiety."},
+  {q:"Which region normally helps regulate/dampen the fear response?", opts:["The prefrontal cortex","The cerebellum","The brainstem only"], a:0, e:"The <b>prefrontal cortex</b> exerts top-down regulation over the amygdala; weak regulation contributes to anxiety."},
+  {q:"A typical cognitive bias in anxiety is:", opts:["Overestimating both the probability and cost of threat","Underestimating all danger","Perfect risk judgement"], a:0, e:"Anxious thinking <b>overestimates the likelihood and severity</b> of feared outcomes."},
+  {q:"A cognitive feature specific to GAD is:", opts:["Intolerance of uncertainty","Catastrophising about heartbeats","Fear of needles"], a:0, e:"<b>Intolerance of uncertainty</b> drives the chronic worry seen in GAD."},
+  {q:"Borkovec proposed that worry in GAD functions partly as:", opts:["Cognitive avoidance of more distressing mental imagery/emotion","A way to solve all problems","A physical reflex"], a:0, e:"Worry (verbal-linguistic) may <b>avoid</b> vivid emotional imagery, dampening arousal but maintaining anxiety."},
+  {q:"Panic disorder commonly leads to:", opts:["Agoraphobic avoidance of places where attacks might occur","Improved confidence","Mania"], a:0, e:"People often begin <b>avoiding</b> situations linked to attacks, which can develop into agoraphobia."},
+  {q:"The two main components of CBT for anxiety are:", opts:["Cognitive restructuring and exposure","Hypnosis and diet","Medication and rest"], a:0, e:"CBT for anxiety combines <b>cognitive restructuring</b> with <b>exposure</b>."},
+  {q:"To reduce relapse, exposure is ideally conducted:", opts:["Across multiple contexts and situations","Only once in one place","Only in imagination"], a:0, e:"Varying contexts strengthens inhibitory learning and reduces <b>return of fear</b>."},
+  {q:"The most effective treatment for specific phobias is:", opts:["Exposure therapy (sometimes in a single session)","Long-term medication only","Avoidance training"], a:0, e:"<b>Exposure</b> is highly effective for specific phobias; one-session treatments can work."},
+  {q:"For performance-type anxiety (e.g. stage fright), which can reduce physical symptoms?", opts:["Beta-blockers","Stimulants","Antipsychotics"], a:0, e:"<b>Beta-blockers</b> can blunt the physical signs (tremor, racing heart) of performance anxiety."},
+  {q:"Anxiety itself is best understood as:", opts:["An adaptive response that becomes a disorder when excessive and impairing","Always pathological","Never useful"], a:0, e:"Normal <b>fight-or-flight</b> anxiety is adaptive; it is a disorder only when disproportionate, persistent and impairing."},
+  {q:"Compared with many other disorders, anxiety disorders tend to have:", opts:["An early age of onset (often childhood/adolescence)","Onset only in old age","No typical onset"], a:0, e:"Many anxiety disorders begin <b>early</b>, in childhood or adolescence."},
+  {q:"In vivo exposure means confronting the feared stimulus:", opts:["In real life","Only in imagination","Through medication"], a:0, e:"<b>In vivo</b> exposure is real-life confrontation, generally more potent than imaginal exposure."},
+  {q:"A key reason CBT outperforms anti-anxiety medication in the long run is that it:", opts:["Teaches durable skills that persist after treatment ends","Works faster in the first hour","Has no side effects ever"], a:0, e:"CBT builds <b>lasting coping skills and new learning</b>, so gains are better maintained than with medication alone."}
+];
+QBANK["Theme 6 · Eating Disorders"] = [
+  {q:"The core features of anorexia nervosa are:", opts:["Restriction leading to low weight, intense fear of weight gain, and body-image disturbance","Binge eating with no weight loss","Refusal to eat any vegetables"], a:0, e:"<b>Anorexia nervosa</b> = energy restriction causing significantly low weight, intense fear of gaining weight, and disturbed body image."},
+  {q:"Which criterion for anorexia was REMOVED in DSM-5?", opts:["Amenorrhea (loss of menstruation)","Low body weight","Fear of weight gain"], a:0, e:"DSM-5 dropped the <b>amenorrhea</b> requirement, since it excluded males and some females."},
+  {q:"The two subtypes of anorexia nervosa are:", opts:["Restricting type and binge-eating/purging type","Acute and chronic","Mild and severe only"], a:0, e:"AN has a <b>restricting</b> subtype and a <b>binge-eating/purging</b> subtype."},
+  {q:"Bulimia nervosa requires binge eating and compensatory behaviour at least:", opts:["Once a week for 3 months","Once a year","Daily for a decade"], a:0, e:"DSM-5 requires binges and compensatory behaviours <b>≥1×/week for 3 months</b>."},
+  {q:"In both anorexia and bulimia, self-evaluation is:", opts:["Unduly influenced by body weight and shape","Unrelated to body image","Based only on intelligence"], a:0, e:"Over-evaluation of <b>weight and shape</b> is central to both disorders."},
+  {q:"A key difference between bulimia nervosa and the binge-purge type of anorexia is that people with bulimia are usually:", opts:["At normal weight or overweight","Severely underweight by definition","Always children"], a:0, e:"<b>Bulimia</b> typically occurs at normal/above-normal weight; the binge-purge AN subtype is by definition underweight."},
+  {q:"Binge-eating disorder (BED) differs from bulimia in that BED has:", opts:["No regular compensatory behaviours","More purging","No distress"], a:0, e:"<b>BED</b> involves recurrent binges with marked distress but <b>without</b> the regular compensatory behaviours of bulimia."},
+  {q:"Which is the most common eating disorder?", opts:["Binge-eating disorder","Anorexia nervosa","Pica"], a:0, e:"<b>BED</b> is the most prevalent eating disorder."},
+  {q:"A 'binge' is defined by:", opts:["Eating an unusually large amount in a discrete period with loss of control","Eating one extra snack","Skipping a meal"], a:0, e:"A <b>binge</b> requires both an objectively large amount in a short time and a <b>sense of loss of control</b>."},
+  {q:"Among psychiatric disorders, anorexia nervosa has:", opts:["One of the highest mortality rates","No associated mortality","The lowest relapse rate"], a:0, e:"<b>Anorexia</b> has among the <b>highest mortality</b> of any mental disorder."},
+  {q:"The main causes of death in anorexia nervosa are:", opts:["Medical complications and suicide","Infections only","Accidents only"], a:0, e:"Deaths result chiefly from <b>medical complications</b> of starvation and from <b>suicide</b>."},
+  {q:"Which is a medical sign of anorexia nervosa?", opts:["Bradycardia, low blood pressure and lanugo (fine body hair)","High fever","Weight gain"], a:0, e:"Starvation causes <b>slow heart rate, hypotension, lanugo, osteoporosis</b> and electrolyte disturbance."},
+  {q:"Repeated self-induced vomiting can cause:", opts:["Dental erosion, electrolyte imbalance and parotid swelling","Improved teeth","Higher bone density"], a:0, e:"Purging leads to <b>enamel erosion, electrolyte disturbance, swollen salivary glands</b> and Russell's sign on the knuckles."},
+  {q:"'Refeeding syndrome' is a danger that occurs:", opts:["When weight restoration begins too quickly in a starved patient","Only after full recovery","From eating vegetables"], a:0, e:"<b>Refeeding syndrome</b> involves dangerous electrolyte/fluid shifts when nutrition is reintroduced too fast."},
+  {q:"Eating disorders are most commonly diagnosed in:", opts:["Adolescent and young-adult women","Older men","Infants"], a:0, e:"Onset typically occurs in <b>adolescence/young adulthood</b>, more often in females."},
+  {q:"Regarding eating disorders in males, they are:", opts:["Increasingly recognised and often under-diagnosed","Impossible","More common than in females"], a:0, e:"Eating disorders <b>do occur in males</b> and are frequently under-recognised."},
+  {q:"A major sociocultural risk factor for eating disorders is:", opts:["Internalisation of the thin ideal promoted by media","Reading books","Playing team sports for fun"], a:0, e:"<b>Thin-ideal internalisation</b> and media/appearance pressures increase risk."},
+  {q:"Which behaviour very often precedes the onset of an eating disorder?", opts:["Dieting / dietary restraint","Overeating vegetables","Sleeping more"], a:0, e:"<b>Dieting</b> is one of the strongest precipitating risk factors for eating disorders."},
+  {q:"Which personality traits are associated with anorexia nervosa?", opts:["Perfectionism and low self-esteem","Impulsivity only","High extraversion only"], a:0, e:"<b>Perfectionism, rigidity and low self-esteem</b> are linked to anorexia."},
+  {q:"The heritability of eating disorders is:", opts:["Substantial — they run in families","Zero","Only environmental"], a:0, e:"Twin/family studies show a <b>significant genetic contribution</b>."},
+  {q:"Which neurotransmitter is implicated in eating disorders?", opts:["Serotonin","Acetylcholine","Histamine only"], a:0, e:"<b>Serotonin</b> dysregulation (affecting appetite and mood) is implicated, alongside dopamine reward pathways."},
+  {q:"The leading evidence-based psychotherapy for bulimia and BED is:", opts:["Enhanced cognitive behavioural therapy (CBT-E)","Bed rest","Hypnosis"], a:0, e:"Fairburn's <b>CBT-E</b> (transdiagnostic) is first-line for bulimia and binge-eating disorder."},
+  {q:"The first-line treatment for adolescents with anorexia nervosa is:", opts:["Family-based treatment (the Maudsley approach)","Solo medication","No treatment"], a:0, e:"<b>Family-based treatment (FBT)</b> is the leading approach for adolescent anorexia."},
+  {q:"In the first phase of family-based treatment for anorexia, parents:", opts:["Take charge of re-feeding and weight restoration","Withdraw entirely","Send the child away"], a:0, e:"Phase 1 of <b>FBT</b> empowers <b>parents to take control of refeeding</b> to restore weight."},
+  {q:"Which medication is approved for bulimia nervosa?", opts:["Fluoxetine (a high-dose SSRI)","Lithium","Insulin"], a:0, e:"<b>Fluoxetine</b> (at higher doses) is the medication approved for bulimia, reducing binge-purge cycles."},
+  {q:"Which medication is approved for binge-eating disorder?", opts:["Lisdexamfetamine","Methadone","Penicillin"], a:0, e:"<b>Lisdexamfetamine</b> is approved to reduce binge frequency in BED."},
+  {q:"In treating anorexia nervosa, the first clinical priority is usually:", opts:["Restoring weight and medical stability","Discussing childhood dreams","Cosmetic surgery"], a:0, e:"<b>Weight restoration and medical stabilisation</b> come first, since starvation impairs thinking and is life-threatening."},
+  {q:"Severe anorexia sometimes requires hospitalisation for:", opts:["Medical stabilisation","A holiday","Cosmetic reasons"], a:0, e:"Inpatient care addresses <b>medical instability</b> (e.g. dangerous vital signs/electrolytes) and supervised refeeding."},
+  {q:"Body-image disturbance in anorexia typically involves:", opts:["Overestimating one's body size","Underestimating one's height","Ignoring appearance entirely"], a:0, e:"People with AN often <b>perceive themselves as larger</b> than they are."},
+  {q:"The central cognitive feature of anorexia is:", opts:["A relentless drive for thinness and fear of fatness","A wish to gain weight","Indifference to weight"], a:0, e:"AN is driven by an intense <b>drive for thinness and fear of weight gain</b>."},
+  {q:"The classic bulimia cycle runs:", opts:["Dietary restriction → binge → purge → guilt → more restriction","Binge → sleep → cure","Exercise → eat → recover"], a:0, e:"Rigid restriction sets up a <b>binge–purge–guilt</b> cycle that perpetuates the disorder."},
+  {q:"Compensatory behaviours in bulimia can include:", opts:["Vomiting, laxatives, fasting and excessive exercise","Drinking water","Sleeping"], a:0, e:"Compensation includes <b>self-induced vomiting, laxative/diuretic misuse, fasting, and over-exercise</b>."},
+  {q:"Avoidant/restrictive food intake disorder (ARFID) differs from anorexia because it:", opts:["Lacks body-image concern or fear of weight gain","Involves more purging","Only affects adults"], a:0, e:"<b>ARFID</b> involves avoidant/restrictive eating (e.g. sensory aversion, fear of choking) <b>without</b> body-image disturbance."},
+  {q:"Pica is defined as:", opts:["Persistent eating of non-nutritive, non-food substances","Eating only protein","Refusing all food"], a:0, e:"<b>Pica</b> is eating non-food items (e.g. dirt, chalk) inappropriate to developmental level."},
+  {q:"Rumination disorder involves:", opts:["Repeated regurgitation of food","Excessive worry","Binge eating"], a:0, e:"<b>Rumination disorder</b> is repeated bringing-up of food that may be re-chewed, re-swallowed or spat out."},
+  {q:"Eating disorders show high comorbidity with:", opts:["Depression, anxiety and OCD","Only physical illness","No other disorders"], a:0, e:"Eating disorders commonly co-occur with <b>depression, anxiety, OCD</b> and substance use."},
+  {q:"A treatment challenge specific to anorexia is that the disorder is often:", opts:["Egosyntonic — the person may not want to change","Always egodystonic","Symptom-free"], a:0, e:"AN is frequently <b>egosyntonic</b>: thinness is valued, so motivation for treatment is low."},
+  {q:"Cognitive features such as rigidity and poor 'set-shifting' are linked to:", opts:["Anorexia nervosa","Pica","Rumination disorder"], a:0, e:"<b>Cognitive rigidity / weak set-shifting</b> (difficulty switching mental sets) is associated with anorexia."},
+  {q:"In terms of prognosis, recovery is generally:", opts:["More favourable for bulimia than for anorexia","Equally poor for both","Always complete in anorexia"], a:0, e:"<b>Bulimia</b> tends to have a better outcome than <b>anorexia</b>, which can become chronic."},
+  {q:"'Pro-ana' online content is concerning because it:", opts:["Promotes and normalises disordered eating","Provides safe treatment","Cures anorexia"], a:0, e:"<b>Pro-ana</b> communities can <b>reinforce</b> eating-disorder behaviours and thin-ideal pressures."},
+  {q:"Which group is at elevated risk for eating disorders?", opts:["Athletes/dancers in 'aesthetic' or weight-class sports","People who never exercise","Only the elderly"], a:0, e:"<b>Aesthetic/weight-focused activities</b> (ballet, gymnastics, wrestling) raise eating-disorder risk."},
+  {q:"Amenorrhea, when present in anorexia, refers to:", opts:["Loss of menstrual periods","Loss of appetite","Loss of memory"], a:0, e:"<b>Amenorrhea</b> is absence of menstruation, a common medical consequence of low weight (no longer a criterion)."},
+  {q:"The transdiagnostic model of bulimia argues that bingeing is maintained largely by:", opts:["Strict dietary restraint that triggers loss of control","Eating regular meals","Sleeping well"], a:0, e:"Rigid <b>dietary restraint</b> sets up the physiological/psychological conditions for binges in the maintenance model."},
+  {q:"A purging behaviour is dangerous mainly because it can cause:", opts:["Electrolyte imbalances that affect the heart","Stronger bones","Better digestion"], a:0, e:"Purging-related <b>electrolyte loss</b> (e.g. low potassium) can cause cardiac arrhythmias and death."},
+  {q:"Why is full nutritional restoration important before deeper psychotherapy in anorexia?", opts:["Starvation itself impairs thinking, mood and concentration","Therapy is illegal otherwise","It is not important"], a:0, e:"<b>Starvation</b> worsens cognition and mood (as shown by the Minnesota starvation study), limiting therapy until weight improves."}
+];
+QBANK["Theme 7 · Substance Use Disorders"] = [
+  {q:"Fetal alcohol spectrum disorder results from:", opts:["Prenatal alcohol exposure","Drinking during adolescence","Caffeine in pregnancy"], a:0, e:"<b>Prenatal alcohol</b> exposure can cause facial anomalies, growth deficits and lifelong cognitive/behavioural problems."},
+  {q:"Wernicke-Korsakoff syndrome in chronic alcohol use is caused by a deficiency of:", opts:["Thiamine (vitamin B1)","Vitamin C","Iron"], a:0, e:"<b>Thiamine deficiency</b> produces confusion, eye-movement problems and severe memory loss (confabulation)."},
+  {q:"Delirium tremens is a feature of:", opts:["Severe alcohol withdrawal","Cannabis intoxication","Caffeine use"], a:0, e:"<b>Delirium tremens</b> — tremor, confusion, hallucinations, seizures — is a potentially fatal alcohol withdrawal state."},
+  {q:"Why is alcohol withdrawal medically dangerous?", opts:["It can cause seizures and delirium that may be life-threatening","It only causes mild boredom","It is always harmless"], a:0, e:"Unlike many drugs, <b>alcohol (and sedative) withdrawal</b> can be lethal without medical management."},
+  {q:"Benzodiazepines are used during alcohol detox because of:", opts:["Cross-tolerance — they act on the same GABA system and prevent seizures","Their stimulant effect","Their antibiotic properties"], a:0, e:"<b>Cross-tolerance</b> with alcohol lets benzodiazepines safely manage withdrawal and prevent seizures."},
+  {q:"Naloxone (Narcan) is used to:", opts:["Reverse an opioid overdose","Treat alcohol withdrawal","Enhance a high"], a:0, e:"<b>Naloxone</b> is an opioid antagonist that rapidly reverses overdose-related respiratory depression."},
+  {q:"The classic opioid overdose triad is:", opts:["Pinpoint pupils, unconsciousness and slowed breathing","Dilated pupils and racing heart","Fever and rash"], a:0, e:"Opioid overdose shows <b>miosis (pinpoint pupils), unresponsiveness and respiratory depression</b>."},
+  {q:"The philosophy of 'harm reduction' is to:", opts:["Reduce the harms of use rather than require abstinence","Punish all users","Ignore the problem"], a:0, e:"<b>Harm reduction</b> aims to minimise negative consequences (e.g. overdose, infection) even if use continues."},
+  {q:"Needle and syringe exchange programmes mainly aim to:", opts:["Reduce transmission of HIV and hepatitis","Increase drug supply","Cure addiction instantly"], a:0, e:"Sterile-equipment programmes lower <b>blood-borne infection</b> rates among people who inject drugs."},
+  {q:"Motivational interviewing is a counselling style that:", opts:["Helps resolve ambivalence in a collaborative, non-confrontational way","Lectures and confronts the client","Ignores the client's goals"], a:0, e:"<b>Motivational interviewing</b> is client-centred, working with ambivalence to strengthen motivation to change."},
+  {q:"The Stages of Change (transtheoretical) model describes movement through:", opts:["Precontemplation, contemplation, preparation, action, maintenance","Denial, anger, bargaining","Mild, moderate, severe"], a:0, e:"Prochaska & DiClemente's <b>stages of change</b> map the process from not considering change to maintaining it."},
+  {q:"In the 'precontemplation' stage, a person:", opts:["Is not yet considering change","Has just quit","Is actively relapsing"], a:0, e:"<b>Precontemplation</b> means the person does not yet see a problem or intend to change."},
+  {q:"Marlatt's relapse-prevention approach focuses on:", opts:["Identifying and coping with high-risk situations","Avoiding all therapy","Increasing drug cues"], a:0, e:"<b>Relapse prevention</b> trains people to anticipate and manage high-risk situations and lapses."},
+  {q:"'Cue reactivity' refers to:", opts:["Craving and arousal triggered by drug-associated cues","An allergic reaction","A withdrawal seizure"], a:0, e:"Drug-paired <b>cues</b> (people, places, paraphernalia) elicit craving and physiological responses, driving relapse."},
+  {q:"The incentive-sensitisation theory distinguishes:", opts:["'Wanting' (craving) from 'liking' (pleasure)","Alcohol from opioids","Tolerance from overdose"], a:0, e:"Robinson & Berridge argued <b>'wanting'</b> (craving) becomes sensitised and dissociates from <b>'liking'</b> (pleasure)."},
+  {q:"Opponent-process theory explains tolerance and withdrawal as:", opts:["The growth of an opposing process that counteracts the drug's effect","A purely genetic event","A spiritual failing"], a:0, e:"Solomon's <b>opponent-process</b> theory: a compensatory 'b-process' strengthens with repetition, producing tolerance and withdrawal."},
+  {q:"The self-medication hypothesis proposes that people use substances to:", opts:["Relieve symptoms of an existing problem (e.g. anxiety, trauma)","Become more anxious","Lose weight only"], a:0, e:"<b>Self-medication</b>: substances are used to dampen distress, so a disorder can drive use."},
+  {q:"'Dual diagnosis' (co-occurring disorders) refers to:", opts:["A substance use disorder alongside another mental disorder","Two different drugs","Two doctors"], a:0, e:"<b>Dual diagnosis</b> describes a SUD plus another psychiatric condition, requiring integrated treatment."},
+  {q:"A key caveat to the 'gateway hypothesis' is that:", opts:["The link may reflect shared risk factors, not direct causation","Soft drugs always cause hard-drug use","It has been fully proven"], a:0, e:"Early-to-later drug use correlations may be due to <b>common underlying risk factors</b> rather than one drug causing the next."},
+  {q:"Which statement about caffeine is correct?", opts:["It is the most widely used psychoactive drug and has a real withdrawal syndrome","It is not psychoactive","It causes opioid overdose"], a:0, e:"<b>Caffeine</b> is the most consumed psychoactive substance; intoxication and withdrawal (headache, fatigue) are recognised."},
+  {q:"Nicotine is significant because it is:", opts:["Highly addictive and tobacco is a leading preventable cause of death","Harmless","A hallucinogen"], a:0, e:"<b>Nicotine</b> is strongly addictive, and tobacco use is a top preventable cause of death worldwide."},
+  {q:"Does cannabis have a withdrawal syndrome?", opts:["Yes — irritability, sleep and appetite disturbance can occur","No, never","Only in children"], a:0, e:"Regular cannabis use can produce a real <b>withdrawal syndrome</b> (irritability, insomnia, reduced appetite)."},
+  {q:"Cannabis use is associated with an increased risk of:", opts:["Psychosis in vulnerable individuals","Improved memory","Lower heart rate permanently"], a:0, e:"Heavy/early cannabis use is linked to higher risk of <b>psychotic outcomes</b>, especially in those predisposed."},
+  {q:"Compared with opioids, hallucinogens generally have:", opts:["Low physical dependence but rapid tolerance","High physical dependence","No psychological effects"], a:0, e:"<b>Hallucinogens</b> cause little physical dependence but tolerance builds quickly."},
+  {q:"Hallucinogen persisting perception disorder (HPPD) involves:", opts:["Flashback-like perceptual disturbances after use","Permanent blindness","Liver failure"], a:0, e:"<b>HPPD</b> is recurrent perceptual phenomena ('flashbacks') after hallucinogen use."},
+  {q:"MDMA ('ecstasy') primarily acts by:", opts:["Causing a large release of serotonin","Blocking all neurotransmission","Mimicking alcohol"], a:0, e:"<b>MDMA</b> floods the brain with serotonin (and dopamine), with concerns about serotonergic neurotoxicity."},
+  {q:"'The crash' after stimulant use refers to:", opts:["Exhaustion, depression and craving as effects wear off","A car accident","Improved mood"], a:0, e:"The stimulant <b>crash</b> brings fatigue, low mood and intense craving, prompting repeated use."},
+  {q:"Methamphetamine is especially concerning because it:", opts:["Is long-lasting and can be neurotoxic","Is completely safe","Is a depressant"], a:0, e:"<b>Methamphetamine</b> produces prolonged effects and is associated with neurotoxicity and dental/skin damage."},
+  {q:"Inhalant abuse is particularly dangerous because it:", opts:["Can cause sudden death and organ damage, and is common in adolescents","Is non-toxic","Only affects the elderly"], a:0, e:"<b>Inhalants</b> can cause 'sudden sniffing death', brain and organ damage; use is most common among young adolescents."},
+  {q:"Tolerance develops because of:", opts:["Neuroadaptation, such as receptor down-regulation","A weak personality","Improved health"], a:0, e:"Repeated exposure triggers <b>neuroadaptations</b> (e.g. receptor changes), so more drug is needed for the same effect."},
+  {q:"How do physical and psychological dependence differ?", opts:["Physical involves tolerance/withdrawal; psychological involves craving and compulsive use","They are identical","Only physical dependence is real"], a:0, e:"<b>Physical dependence</b> = tolerance/withdrawal; <b>psychological dependence</b> = craving and compulsive use even without physical withdrawal."},
+  {q:"Withdrawal symptoms are typically:", opts:["Opposite to the drug's acute effects","Identical to intoxication","Always pleasant"], a:0, e:"Withdrawal usually reflects <b>rebound</b> in the opposite direction (e.g. stimulant withdrawal causes fatigue/depression)."},
+  {q:"Despite its disinhibiting effects, alcohol is pharmacologically a:", opts:["Depressant","Stimulant","Hallucinogen"], a:0, e:"<b>Alcohol</b> is a CNS depressant; early 'stimulation' reflects disinhibition, not true stimulant action."},
+  {q:"Blood alcohol concentration (BAC) is useful because it:", opts:["Indexes the degree of intoxication and impairment","Measures personality","Detects opioids"], a:0, e:"<b>BAC</b> reflects how much alcohol is in the blood and predicts behavioural/physical impairment."},
+  {q:"The 'alcohol flush' reaction (common in some East Asian populations) is linked to:", opts:["An ALDH2 variant and is associated with lower alcoholism risk","Higher alcoholism risk","Opioid receptors"], a:0, e:"An <b>ALDH2</b> variant causes flushing/nausea, which tends to <b>reduce</b> heavy drinking and dependence risk."},
+  {q:"The 'telescoping' effect describes how, in women, substance problems often:", opts:["Progress faster from first use to dependence","Never develop","Start in old age"], a:0, e:"<b>Telescoping</b>: women may progress more rapidly from initiation to severe substance problems than men."},
+  {q:"The brain-disease model of addiction frames it as:", opts:["A chronic, relapsing disorder of brain circuits","A simple bad habit","A moral failing"], a:0, e:"The <b>brain-disease model</b> (e.g. NIDA) views addiction as a chronic, relapsing condition involving reward, motivation and control circuits."},
+  {q:"Impaired functioning of the prefrontal cortex in addiction contributes to:", opts:["Loss of control over use and poor decision-making","Better impulse control","Improved memory"], a:0, e:"Weakened <b>prefrontal</b> control reduces the ability to resist craving and weigh long-term consequences."},
+  {q:"Acamprosate and naltrexone are used to:", opts:["Support maintenance of abstinence in alcohol use disorder","Cause intoxication","Treat ADHD"], a:0, e:"<b>Acamprosate</b> and <b>naltrexone</b> reduce craving/relapse in alcohol use disorder."},
+  {q:"Buprenorphine for opioid use disorder is a:", opts:["Partial agonist that reduces craving and withdrawal","Pure stimulant","Antibiotic"], a:0, e:"<b>Buprenorphine</b> is a partial opioid agonist (often with naloxone) that eases withdrawal and craving with a ceiling on effects."},
+  {q:"'Set and setting' influence a drug experience by referring to:", opts:["The user's mindset and the physical/social environment","The drug's chemical formula","The legal status only"], a:0, e:"<b>Set</b> (expectations/mood) and <b>setting</b> (environment) shape how a drug is experienced."},
+  {q:"SMART Recovery differs from 12-step programmes in that it is:", opts:["Based on cognitive-behavioural, self-empowerment principles","Faith-based with sponsors","Medication only"], a:0, e:"<b>SMART Recovery</b> is a secular, CBT-based self-help alternative emphasising self-management."},
+  {q:"The Community Reinforcement Approach treats addiction by:", opts:["Rearranging the person's environment so a sober life is more rewarding","Removing all social contact","Punishing relapse harshly"], a:0, e:"<b>CRA</b> makes a substance-free lifestyle more rewarding by improving work, relationships and recreation."},
+  {q:"Substance use disorders very commonly co-occur with:", opts:["Trauma and PTSD","Perfect mental health","No other conditions"], a:0, e:"High rates of <b>trauma/PTSD</b> (and depression/anxiety) accompany substance use disorders."},
+  {q:"Which statement about recovery from addiction is most accurate?", opts:["Recovery is achievable and often takes several attempts","Recovery is impossible","One relapse means permanent failure"], a:0, e:"Because addiction is chronic and relapsing, <b>recovery is achievable</b> and frequently follows multiple attempts; relapse is part of the process, not failure."}
+];
+QBANK["Theme 8 · Diagnosis & the DSM-5"] = [
+  {q:"Clinical assessment is best described as:", opts:["The systematic measurement of psychological, biological and social factors","Prescribing medication","Filing insurance forms"], a:0, e:"<b>Clinical assessment</b> systematically evaluates biopsychosocial factors in someone who may have a disorder."},
+  {q:"Reliability of a measure refers to its:", opts:["Consistency","Truthfulness","Cost"], a:0, e:"<b>Reliability</b> is consistency — the same result on repeated measurement."},
+  {q:"When two clinicians independently reach the same diagnosis, this shows:", opts:["Interrater reliability","Predictive validity","Standardisation"], a:0, e:"<b>Interrater reliability</b> is agreement between different raters assessing the same case."},
+  {q:"Getting the same score on a test taken twice reflects:", opts:["Test-retest reliability","Face validity","Reactivity"], a:0, e:"<b>Test-retest reliability</b> is consistency of results across two administrations."},
+  {q:"Validity refers to whether a measure:", opts:["Measures what it claims to measure","Is consistent over time","Is inexpensive"], a:0, e:"<b>Validity</b> is whether the measure actually captures the intended construct."},
+  {q:"Which statement is true about reliability and validity?", opts:["A measure can be reliable yet invalid","A reliable measure must be valid","Validity makes reliability unnecessary"], a:0, e:"Reliability is <b>necessary but not sufficient</b> for validity — a consistently wrong measure is reliable but invalid."},
+  {q:"A test that forecasts future behaviour or outcomes has:", opts:["Predictive validity","Face validity","Test-retest reliability"], a:0, e:"<b>Predictive validity</b> is the ability to forecast future criteria (e.g. SAT predicting grades)."},
+  {q:"When a measure agrees with another measure taken at the same time, it shows:", opts:["Concurrent validity","Predictive validity","Reactivity"], a:0, e:"<b>Concurrent validity</b> is agreement with an established measure at the same point in time."},
+  {q:"The weakest form of validity is:", opts:["Face validity","Construct validity","Predictive validity"], a:0, e:"<b>Face validity</b> — merely appearing to measure the construct — is the weakest evidence."},
+  {q:"Construct validity concerns whether a test:", opts:["Measures the theoretical construct it targets","Looks plausible on the surface","Is easy to score"], a:0, e:"<b>Construct validity</b> asks whether the test truly assesses the underlying theoretical concept."},
+  {q:"Standardisation means:", opts:["Applying the same procedures and norms each time","Changing the test for each person","Removing scoring rules"], a:0, e:"<b>Standardisation</b> ensures uniform administration/scoring so scores can be compared fairly."},
+  {q:"'Norms' in testing are:", opts:["Reference scores from a comparison group","The correct answers","Ethical rules"], a:0, e:"<b>Norms</b> provide a standard distribution against which an individual's score is interpreted."},
+  {q:"'Reactivity' during observation refers to:", opts:["People changing behaviour because they are watched","An allergic reaction","A scoring error"], a:0, e:"<b>Reactivity</b> means being observed alters the behaviour being measured."},
+  {q:"Compared with unstructured interviews, structured interviews have:", opts:["Higher reliability","Lower reliability","No standard questions"], a:0, e:"Fixed questions make <b>structured interviews</b> more reliable than free-form unstructured ones."},
+  {q:"The Mental Status Exam assesses things such as:", opts:["Appearance, mood, thought processes and orientation","Blood pressure only","Reading speed only"], a:0, e:"The <b>MSE</b> snapshots current functioning: appearance/behaviour, mood/affect, thought, cognition and orientation."},
+  {q:"Projective tests are based on the assumption that people will:", opts:["Project inner conflicts onto ambiguous stimuli","Answer factual questions","Show their IQ"], a:0, e:"<b>Projective tests</b> (e.g. Rorschach, TAT) assume responses to ambiguous stimuli reveal unconscious content."},
+  {q:"A major criticism of projective tests is their:", opts:["Questionable reliability and validity","Excessive objectivity","High cost only"], a:0, e:"<b>Projective tests</b> are criticised for limited reliability and validity compared with objective measures."},
+  {q:"The MMPI is a:", opts:["Self-report personality inventory","Projective test","Brain scan"], a:0, e:"The <b>MMPI</b> is an objective, empirically-keyed self-report personality inventory."},
+  {q:"Personality inventories like the MMPI and NEO-PI-R are:", opts:["Objective, standardised self-report questionnaires","Ambiguous projective tasks","Physiological recordings"], a:0, e:"These are <b>objective self-report</b> measures scored against norms."},
+  {q:"Which neuroimaging method primarily shows brain FUNCTION/activity?", opts:["PET","MRI","CT"], a:0, e:"<b>PET</b> images functional activity, whereas MRI and CT mainly show structure."},
+  {q:"Behavioural assessment using the ABC model records:", opts:["Antecedents, Behaviour, Consequences","Affect, Beliefs, Cognitions","Anxiety, Boredom, Calm"], a:0, e:"The <b>ABC</b> model logs the context, the behaviour, and what follows it."},
+  {q:"'Self-monitoring' in assessment means:", opts:["The client records their own behaviour/symptoms","The clinician watches secretly","Brain monitoring"], a:0, e:"<b>Self-monitoring</b> has clients track their own behaviours, thoughts or moods over time."},
+  {q:"The WAIS and Stanford-Binet are tests of:", opts:["Intelligence","Personality","Brain structure"], a:0, e:"These are standardised <b>intelligence</b> tests yielding IQ scores relative to age norms."},
+  {q:"Clinical diagnosis is the process of:", opts:["Determining whether symptoms meet criteria for a specific disorder","Choosing a medication dose","Setting a therapy price"], a:0, e:"<b>Diagnosis</b> matches a person's symptoms to defined diagnostic criteria."},
+  {q:"A 'syndrome' is:", opts:["A cluster of symptoms that occur together","A single symptom","A medication"], a:0, e:"A <b>syndrome</b> is a recognisable pattern of co-occurring signs and symptoms."},
+  {q:"'Comorbidity' means:", opts:["The presence of two or more disorders in the same person","A cure","A type of medication"], a:0, e:"<b>Comorbidity</b> is the co-occurrence of multiple disorders, common in psychopathology."},
+  {q:"A categorical approach to classification assumes:", opts:["A disorder is either present or absent","Symptoms lie on a continuum","Everyone is the same"], a:0, e:"<b>Categorical</b> classification (as in the DSM) treats disorders as discrete present/absent categories."},
+  {q:"A dimensional approach instead treats symptoms as:", opts:["Lying on a continuum of severity","Strictly present or absent","Irrelevant"], a:0, e:"<b>Dimensional</b> models place symptoms on continua (like blood pressure), better capturing severity and overlap."},
+  {q:"The DSM is published by the:", opts:["American Psychiatric Association","World Health Organization","United Nations"], a:0, e:"The <b>DSM</b> is produced by the American Psychiatric Association (APA)."},
+  {q:"The ICD is published by the:", opts:["World Health Organization","American Psychiatric Association","FDA"], a:0, e:"The <b>ICD</b> is the World Health Organization's global classification, used worldwide."},
+  {q:"Emil Kraepelin is known for:", opts:["Early systematic classification of mental disorders","Inventing the Rorschach","Discovering serotonin"], a:0, e:"<b>Kraepelin</b> pioneered classifying disorders by their symptom patterns and course."},
+  {q:"DSM-5 was published in 2013; its text revision (DSM-5-TR) appeared in:", opts:["2022","2000","2018"], a:0, e:"The <b>DSM-5-TR</b> text revision was published in 2022."},
+  {q:"What did DSM-5 do with the multiaxial (five-axis) system?", opts:["Removed it","Expanded it to ten axes","Made it mandatory"], a:0, e:"DSM-5 <b>eliminated</b> the multiaxial system used in DSM-III/IV."},
+  {q:"DSM-5 switched to Arabic numerals (5 rather than V) to:", opts:["Allow incremental updates like 5.1, 5.2","Match Roman tradition","Save printing costs"], a:0, e:"<b>Arabic numbering</b> permits software-style point updates between major editions."},
+  {q:"Since DSM-III, the manual has been largely:", opts:["Descriptive/atheoretical, grouping disorders by symptoms","Based on Freudian theory","Based on brain scans"], a:0, e:"From <b>DSM-III</b> onward the approach is descriptive and atheoretical, organising by observable symptoms."},
+  {q:"The statistic 'kappa' is used to assess a diagnosis's:", opts:["Interrater reliability","Cost","Popularity"], a:0, e:"<b>Kappa</b> indexes how reliably different clinicians assign the same diagnosis."},
+  {q:"The NIMH Research Domain Criteria (RDoC) initiative proposes studying:", opts:["Transdiagnostic dimensions across biology and behaviour","Only DSM categories","Astrology"], a:0, e:"<b>RDoC</b> studies dimensions (e.g. fear, reward) cutting across diagnostic categories."},
+  {q:"The 'p-factor' refers to:", opts:["A proposed general factor of psychopathology","A personality test","A medication"], a:0, e:"The <b>p-factor</b> is a hypothesised general dimension underlying liability to many disorders."},
+  {q:"A criticism that the number of diagnoses keeps growing relates to concerns about:", opts:["Medicalising normal experience (over-diagnosis)","Too few diagnoses","Perfect reliability"], a:0, e:"The expanding count fuels worries about <b>over-diagnosis</b> and pathologising ordinary life."},
+  {q:"Person-first language ('a person with schizophrenia') is encouraged to:", opts:["Reduce stigma by not defining people by their disorder","Increase diagnoses","Shorten records"], a:0, e:"<b>Person-first language</b> separates the individual from the label to combat stigma."},
+  {q:"Rosenhan's 'On Being Sane in Insane Places' study highlighted:", opts:["How diagnostic labels and context shape perception of behaviour","That diagnosis is perfectly objective","That hospitals cure everyone"], a:0, e:"<b>Rosenhan</b> showed pseudopatients' normal behaviour was interpreted through the lens of their label, raising concerns about labelling."},
+  {q:"The Cultural Formulation Interview helps clinicians:", opts:["Understand how culture shapes a person's distress","Diagnose faster without questions","Measure IQ"], a:0, e:"The <b>CFI</b> (~16 questions) explores cultural influences on experience and expression of symptoms."},
+  {q:"'Cultural concepts of distress' (e.g. ataque de nervios) are:", opts:["Culturally specific ways of experiencing/expressing suffering","Universal DSM disorders","Brain diseases"], a:0, e:"These are <b>culture-bound</b> patterns of distress that may not map neatly onto Western categories."},
+  {q:"'Clinical utility' of a diagnosis refers to:", opts:["How useful it is for communication, prognosis and treatment","Its length","Its age"], a:0, e:"<b>Clinical utility</b> is how helpful a category is in practice — for communicating, predicting course and guiding treatment."},
+  {q:"A 'provisional' diagnosis indicates that the clinician:", opts:["Expects criteria will be met once more information is gathered","Has ruled the disorder out","Is certain"], a:0, e:"<b>Provisional</b> signals a working diagnosis the clinician expects to confirm with further information."}
+];
+
+/* ===== short labels for chips/tags ===== */
+const SHORT = {
+  "Theme 2 · Autism Spectrum Disorder":"ASD",
+  "Theme 3 · Mood Disorders":"Mood",
+  "Theme 4 · ADHD":"ADHD",
+  "Theme 5 · Anxiety Disorders":"Anxiety",
+  "Theme 6 · Eating Disorders":"Eating",
+  "Theme 7 · Substance Use Disorders":"Substance",
+  "Theme 8 · Diagnosis & the DSM-5":"DSM-5"
+};
+
+/* ===== STATE ===== */
+let curSet = 0;
+let themeFilter = 'all';
+let list = [];
+let cur = 0;
+
+/* attach a .chosen slot to every question once, and shuffle option order so
+   the correct answer isn't always in the same position */
+THEMES.forEach(t => (QBANK[t]||[]).forEach(q => {
+  q.chosen = (q.chosen===undefined ? null : q.chosen);
+  const correct = q.opts[q.a];
+  for(let i=q.opts.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [q.opts[i],q.opts[j]]=[q.opts[j],q.opts[i]]; }
+  q.a = q.opts.indexOf(correct);
+}));
+
+/* ===== START SCREEN ===== */
+function buildSets(){
+  const g = document.getElementById('setgrid');
+  g.innerHTML='';
+  for(let s=0;s<3;s++){
+    const total = THEMES.reduce((n,t)=> n + Math.min(15,(QBANK[t]||[]).slice(s*15,s*15+15).length),0);
+    const c=document.createElement('div');
+    c.className='setcard';
+    c.onclick=()=>openSet(s);
+    c.innerHTML=`<div class="badge">Practice Set</div><h3>Set ${s+1}</h3>`+
+      `<p>${total} questions · 15 per theme across all 7 themes. Fresh questions — no overlap with the other sets.</p>`+
+      `<span class="go">Begin Set ${s+1} →</span>`;
+    g.appendChild(c);
+  }
+}
+
+/* ===== OPEN A SET ===== */
+function openSet(s){
+  curSet=s; themeFilter='all'; cur=0;
+  document.getElementById('start').style.display='none';
+  document.getElementById('quiz').style.display='block';
+  document.getElementById('setlabel').textContent='Set '+(s+1);
+  buildChips();
+  buildList();
+  render();
+  window.scrollTo(0,0);
+}
+
+function backToSets(){
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('start').style.display='flex';
+  document.getElementById('progfill').style.width='0';
+  buildSets();
+  window.scrollTo(0,0);
+}
+
+/* ===== CHIPS ===== */
+function buildChips(){
+  const host=document.getElementById('chips');
+  host.innerHTML='';
+  const mk=(label,val)=>{
+    const c=document.createElement('div');
+    c.className='chip'+(themeFilter===val?' active':'');
+    c.textContent=label;
+    c.onclick=()=>{themeFilter=val;cur=0;buildList();buildChips();render();window.scrollTo({top:0,behavior:'smooth'});};
+    host.appendChild(c);
+  };
+  mk('All themes','all');
+  THEMES.forEach(t=>mk(SHORT[t],t));
+}
+
+/* ===== BUILD CURRENT LIST ===== */
+function buildList(){
+  list=[];
+  THEMES.forEach(t=>{
+    if(themeFilter!=='all' && themeFilter!==t) return;
+    (QBANK[t]||[]).slice(curSet*15, curSet*15+15).forEach(q=>{ q.theme=t; list.push(q); });
+  });
+}
+
+/* ===== SCORE over whole current set ===== */
+function computeScore(){
+  let correct=0, answered=0;
+  THEMES.forEach(t=>{
+    (QBANK[t]||[]).slice(curSet*15, curSet*15+15).forEach(q=>{
+      if(q.chosen!=null){ answered++; if(q.chosen===q.a) correct++; }
+    });
+  });
+  return {correct, answered};
+}
+
+/* ===== RENDER ===== */
+function render(){
+  if(!list.length) return;
+  cur=Math.max(0,Math.min(list.length-1,cur));
+  const item=list[cur];
+  document.getElementById('qcount').textContent=`Question ${cur+1} of ${list.length}`;
+  document.getElementById('themetag').textContent=item.theme.replace('·','—');
+  document.getElementById('qtext').textContent=item.q;
+
+  const host=document.getElementById('opts');
+  host.innerHTML='';
+  const locked=item.chosen!=null;
+  item.opts.forEach((o,i)=>{
+    const d=document.createElement('div');
+    d.className='opt'+(locked?' locked':'');
+    if(locked){
+      if(i===item.a) d.classList.add('correct');
+      if(item.chosen===i && i!==item.a) d.classList.add('wrong');
+    }
+    d.innerHTML=`<span class="lt">${String.fromCharCode(65+i)}</span><span class="tx">${o}</span>`;
+    if(!locked) d.onclick=()=>answer(i);
+    host.appendChild(d);
+  });
+
+  const ex=document.getElementById('explain');
+  if(locked){
+    const right=item.chosen===item.a;
+    ex.className='explain show';
+    ex.innerHTML=`<span class="verdict ${right?'ok':'no'}">${right?'✓ Correct.':'✗ Not quite.'}</span>${item.e}`;
+  } else {
+    ex.className='explain'; ex.innerHTML='';
+  }
+
+  document.getElementById('prevBtn').disabled=cur===0;
+  document.getElementById('nextBtn').disabled=cur===list.length-1;
+
+  const s=computeScore();
+  document.getElementById('scorepill').textContent=`${s.correct} / ${s.answered} correct`;
+  document.getElementById('progfill').style.width=((cur+1)/list.length*100)+'%';
+  buildNavigator();
+}
+
+function answer(i){
+  const item=list[cur];
+  if(item.chosen!=null) return;
+  item.chosen=i;
+  render();
+}
+
+function go(d){ cur=Math.max(0,Math.min(list.length-1,cur+d)); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+/* ===== NAVIGATOR ===== */
+function buildNavigator(){
+  const g=document.getElementById('ngrid');
+  g.innerHTML='';
+  list.forEach((q,i)=>{
+    const c=document.createElement('div');
+    c.className='ncell'+(i===cur?' current':'');
+    if(q.chosen!=null) c.classList.add(q.chosen===q.a?'ok':'no');
+    c.textContent=i+1;
+    c.onclick=()=>{cur=i;render();window.scrollTo({top:0,behavior:'smooth'});};
+    g.appendChild(c);
+  });
+}
+
+/* keyboard: arrows + A/B/C / 1/2/3 */
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('quiz').style.display!=='block') return;
+  if(e.key==='ArrowRight') go(1);
+  else if(e.key==='ArrowLeft') go(-1);
+  else if(['1','2','3'].includes(e.key)) answer(+e.key-1);
+  else if(['a','b','c'].includes(e.key.toLowerCase())) answer(e.key.toLowerCase().charCodeAt(0)-97);
+});
+
+buildSets();
+</script>
+</body>
+</html>
